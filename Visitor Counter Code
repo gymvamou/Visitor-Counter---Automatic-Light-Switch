@@ -1,0 +1,85 @@
+//Visitor Counter_Auto Light Switch
+// Gymnasio Vamou
+
+String in, out;
+int total = 0;
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27,16 ,2); // set the LCD address to 0x27, set 16 chars and 2 line display
+int Relay=6;
+int IN=7;
+int OUT=8;
+int ledGreen=9;
+int ledRed=10;
+
+void setup() {
+  lcd.init(); // initialize the lcd
+  lcd.backlight();
+  lcd.setCursor(0,0);
+  lcd.print("Visitor Counter");
+  pinMode(ledGreen, OUTPUT);
+  pinMode(ledRed, OUTPUT);
+  pinMode(OUT, INPUT);
+  pinMode(IN, INPUT);
+  pinMode(Relay, OUTPUT);
+  Serial.begin(9600); 
+  delay(500);
+}
+
+void show() {
+  Serial.print(total);
+    Serial.println(" people in room.");
+    
+}
+void loop() {
+  if (digitalRead(IN) == LOW) {
+    while (digitalRead(OUT) == HIGH) {
+    }
+    analogWrite(A1, 255);
+    Serial.print("Person entered there are ");
+    total++;
+    show();
+    delay(500);
+    analogWrite(A1, 0);
+    lcd.clear();
+    lcd.print("Person In Room:");
+    lcd.setCursor(0,1);
+    lcd.print(total);
+    digitalWrite(ledGreen,HIGH);
+    digitalWrite(ledRed,LOW);
+  } else if (digitalRead(OUT) == LOW) {
+    while (digitalRead(IN) == HIGH) {
+    }
+    analogWrite(A0, 255);
+    Serial.print("Person exited there are ");
+    total--;
+    show();
+    delay(500);
+    analogWrite(A0, 0);
+    lcd.clear();
+    lcd.print("Person In Room:");
+    lcd.setCursor(0,1);
+    lcd.print(total);
+    digitalWrite(ledGreen, LOW) ;
+    digitalWrite(ledRed, HIGH) ;
+  }
+  if(total ==0)
+  {
+    digitalWrite(Relay, LOW);
+    lcd.clear();
+    lcd.print("Nobody In Room");
+    lcd.setCursor(0,1);
+    lcd.print("Light Is Off");
+    digitalWrite(ledGreen, LOW) ;
+    digitalWrite(ledRed, LOW) ;
+    delay(1000); 
+  }
+  else
+    digitalWrite(Relay, HIGH);
+    
+    if(total < 0)
+  {
+    digitalWrite(Relay, LOW);
+    total = 0;
+  }
+}
