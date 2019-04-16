@@ -12,15 +12,15 @@ Student project created at Gymnasio Vamou.
 ΥΛΙΚΑ που θα χρειαστούν:
 
 1. 1x Arduino UNO                                 8,00€
-2. 1x breadboard                                  5,00€
+2. 1x breadboard                                  4,00€
 3. 2x Infrared Obstacle Avoidance Sensor          5,00€
 4. 1x 5V 1-Channel Relay Module                   2,50€
-5. 2x LED                                         0,50€
+5. 3x LED                                         0,60€
 6. 1x 9V battery with jack                        3,00€
 7. 1x LCD (16χ2) οθόνη                            8,00€
 8. καλώδια                                        2,00€  
 9. απλό ντουί λάμπας 220V (E27)                   2,00€  
-10. διακόπτης                                     1,00€
+10. διακόπτης                                     0,80€
 11. κουτί που θα τοποθετηθεί όλο το σύστημα
 
                            εκτιμώμενο κόστος:    35 - 40 €
